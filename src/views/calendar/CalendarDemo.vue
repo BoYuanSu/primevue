@@ -80,7 +80,8 @@
                 </div>
 
                 <h5>Inline</h5>
-                <Calendar v-model="date14" :inline="true" :showWeek="true" />
+                <button @click="addInvalidDate">change disabledDates</button>
+                <Calendar v-model="date14" :inline="true" :disabledDates="invalidDates" :showWeek="true" />
             </div>
         </div>
 
@@ -141,11 +142,20 @@ export default {
 					breakpoint: '1200px',
 					numMonths: 1
 				}
-			]
+			],
+            counter: 0
         }
     },
 	components: {
 		'CalendarDoc': CalendarDoc
+    },
+    methods: {
+        addInvalidDate(){
+            this.counter++
+            let invalidDate = new Date();
+            invalidDate.setDate(invalidDate.getDate() + this.counter);
+            this.invalidDates.push(invalidDate)
+        }
     }
 }
 </script>
